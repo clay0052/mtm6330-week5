@@ -18,3 +18,15 @@ gulp.task('default', function () {
     sassPath, // which files to watch for changes (use our variable)
     ['sass']) // an array of tasks to run when changes are detected.
 })
+
+gulp.task('sass', function() {
+  const plugins = [
+    autoprefixer({ browsers: ['last 2 versions']}),
+    cssnano()
+  ]
+  return gulp
+  .src(sassPath)
+  .pipe(sass())
+  .pipe(postcss(plugins))
+  .pipe(gulp.dest('./css/min'))
+})
